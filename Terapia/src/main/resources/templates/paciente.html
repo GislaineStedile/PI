@@ -1,30 +1,36 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
   <meta charset="UTF-8">
-  <title>Paciente</title>
-  <link rel="stylesheet" href="/css/style.css">
+  <title>Pacientes</title>
+  <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
 <header><h1>Área do Paciente</h1></header>
 <nav>
-  <a href="index.html">Início</a>
-  <a href="profissional.html">Profissional</a>
-  <a href="sistema.html">Sistema IA</a>
-  <a href="emergencia.html">Emergência</a>
+  <nav>
+    <a th:href="@{/}">Início</a>
+    <a th:href="@{/profissionais}">Profissional</a>
+    <a th:href="@{/emergencias}">Emergência</a>
+    <a th:href="@{/autoavaliacoes}">Autoavaliações</a>
+    <a th:href="@{/tcc}">TCC</a>
+  </nav>
+
 </nav>
 <section>
-  <div class="card">
-    <h2>Autoavaliações</h2>
-    <p>Visualize e registre seu histórico emocional.</p>
-  </div>
-  <div class="card">
-    <h2>Chat Terapêutico</h2>
-    <p>Converse com o sistema para apoio emocional.</p>
-  </div>
-  <div class="card">
-    <h2>Receber TCC</h2>
-    <p>Acesse conteúdos terapêuticos personalizados.</p>
+  <form th:action="@{/pacientes}" method="post" class="card">
+    <h2>Novo Paciente</h2>
+    <input type="text" name="nome" placeholder="Nome" required>
+    <input type="email" name="email" placeholder="Email" required>
+    <input type="text" name="humorAtual" placeholder="Humor Atual">
+    <button type="submit">Salvar</button>
+  </form>
+
+  <div th:each="p : ${pacientes}" class="card">
+    <h2 th:text="${p.nome}">Nome</h2>
+    <p>Email: <span th:text="${p.email}">email</span></p>
+    <p>Humor atual: <span th:text="${p.humorAtual}">humor</span></p>
+    <a th:href="@{'/pacientes/delete/' + ${p.id}}">Excluir</a>
   </div>
 </section>
 </body>

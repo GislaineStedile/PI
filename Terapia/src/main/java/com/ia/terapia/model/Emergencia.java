@@ -14,7 +14,6 @@ public class Emergencia {
     @Id
     @GeneratedValue
     private Long id;
-    private String recomendacao;
     private boolean contatoRealizado;
 
     @ManyToOne

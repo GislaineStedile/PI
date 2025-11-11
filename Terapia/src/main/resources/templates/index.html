@@ -1,25 +1,25 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
 <head>
     <meta charset="UTF-8">
     <title>Plataforma Terapia IA</title>
-    <link rel="stylesheet" href="/css/style.css">
+    <link rel="stylesheet" th:href="@{/css/style.css}">
 </head>
 <body>
-    <header>
-        <h1>Bem-vindo ao Sistema Terapêutico</h1>
-    </header>
-    <nav>
-        <a href="paciente.html">Paciente</a>
-        <a href="profissional.html">Profissional</a>
-        <a href="sistema.html">Sistema IA</a>
-        <a href="emergencia.html">Emergência</a>
-    </nav>
-    <section>
-        <div class="card">
-            <h2>Escolha uma área para começar</h2>
-            <p>Este sistema ajuda pacientes, profissionais e IA a colaborarem em prol da saúde mental.</p>
-        </div>
-    </section>
+<header><h1>Bem-vindo ao Sistema Terapêutico</h1></header>
+<nav>
+    <a th:href="@{/pacientes}">Paciente</a>
+    <a th:href="@{/profissionais}">Profissional</a>
+    <a th:href="@{/emergencias}">Emergência</a>
+    <a th:href="@{/autoavaliacoes}">Autoavaliações</a>
+    <a th:href="@{/tcc}">TCC</a>
+</nav>
+<section>
+    <div class="card">
+        <h2>Escolha uma área para começar</h2>
+        <p>Este sistema ajuda pacientes e profissionais a colaborarem em prol da saúde mental.</p>
+    </div>
+</section>
 </body>
 </html>
+

@@ -2,28 +2,36 @@ package com.ia.terapia.controller;
 
 import com.ia.terapia.model.Paciente;
 import com.ia.terapia.service.PacienteService;
-import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
-@RestController
+
+@Controller
 @RequestMapping("/pacientes")
 public class PacienteController {
-    @Autowired
-    private PacienteService service;
+    private final PacienteService service;
 
-    @GetMapping
-    public List<Paciente> listar() { return service.listar(); }
-
-    @PostMapping
-    public Paciente criar(@RequestBody Paciente paciente) {
-        return service.salvar(paciente);
+    public PacienteController(PacienteService service) {
+        this.service = service;
     }
 
-    @PutMapping("/{id}")
-    public Optional<Paciente> atualizar(@PathVariable Long id, @RequestBody Paciente dados) {
-        return service.buscarPorId(id);
+    @GetMapping
+    public String listar(Model model) {
+        model.addAttribute("pacientes", service.listar());
+        return "paciente";
+    }
+
+    @PostMapping
+    public String salvar(@ModelAttribute Paciente paciente) {
+        service.salvar(paciente);
+        return "redirect:/pacientes";
+    }
+
+    @GetMapping("/delete/{id}")
+    public String deletar(@PathVariable Long id) {
+        service.deletar(id);
+        return "redirect:/pacientes";
     }
 }

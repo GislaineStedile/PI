@@ -18,16 +18,5 @@ public class EmergenciaService {
         return repository.findAll();
     }
 
-    public Emergencia salvar(Emergencia emergencia) {
-        return repository.save(emergencia);
-    }
-
-    public Optional<Emergencia> buscarPorId(Long id) {
-        return repository.findById(id);
-    }
-
-    public void deletar(Long id) {
-        repository.deleteById(id);
-    }
 }
 

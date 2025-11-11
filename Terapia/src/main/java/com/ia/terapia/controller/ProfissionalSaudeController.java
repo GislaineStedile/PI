@@ -2,40 +2,35 @@ package com.ia.terapia.controller;
 
 import com.ia.terapia.model.ProfissionalSaude;
 import com.ia.terapia.service.ProfissionalService;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
-import java.util.Optional;
 
-@RestController
+@Controller
 @RequestMapping("/profissionais")
 public class ProfissionalSaudeController {
+    private final ProfissionalService service;
 
-    @Autowired
-    private ProfissionalService service;
+    public ProfissionalSaudeController(ProfissionalService service) {
+        this.service = service;
+    }
 
     @GetMapping
-    public List<ProfissionalSaude> listar() {
-        return service.listar();
+    public String listar(Model model) {
+        model.addAttribute("profissionais", service.listar());
+        return "profissional";
     }
 
     @PostMapping
-    public ProfissionalSaude criar(@RequestBody ProfissionalSaude profissional) {
-        return service.salvar(profissional);
+    public String salvar(@ModelAttribute ProfissionalSaude profissional) {
+        service.salvar(profissional);
+        return "redirect:/profissionais";
     }
 
-    @GetMapping("/{id}")
-    public ResponseEntity<ProfissionalSaude> buscar(@PathVariable Long id) {
-        return service.buscarPorId(id)
-                .map(ResponseEntity::ok)
-                .orElse(ResponseEntity.notFound().build());
-    }
-
-    @PutMapping("/{id}")
-    public Optional<ProfissionalSaude> atualizar(@PathVariable Long id, @RequestBody ProfissionalSaude saude) {
-        return service.buscarPorId(id);
+    @GetMapping("/delete/{id}")
+    public String deletar(@PathVariable Long id) {
+        service.deletar(id);
+        return "redirect:/profissionais";
     }
 }
-

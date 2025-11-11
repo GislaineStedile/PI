@@ -18,6 +18,7 @@ public class ProfissionalSaude {
     private Long id;
     private String nome;
     private String especialidade;
+    private String email;
 
     @ManyToMany
     private List<Paciente> pacientes;

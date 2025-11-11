@@ -23,12 +23,4 @@ public class AutoavaliacaoService {
         return repository.save(autoavaliacao);
     }
 
-    public Optional<Autoavaliacao> buscarPorId(Long id) {
-        return repository.findById(id);
-    }
-
-    public ResponseEntity<Void> deletar(Long id) {
-        repository.deleteById(id);
-        return null;
-    }
 }

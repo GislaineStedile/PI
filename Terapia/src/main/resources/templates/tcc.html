@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>TCC Terapêutico</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header><h1>Conteúdos Terapêuticos (TCC)</h1></header>
+<nav>
+    <a th:href="@{/}">Início</a>
+    <a th:href="@{/pacientes}">Paciente</a>
+    <a th:href="@{/profissionais}">Profissional</a>
+    <a th:href="@{/emergencias}">Emergência</a>
+    <a th:href="@{/autoavaliacoes}">Autoavaliações</a>
+</nav>
+
+<section>
+    <form th:action="@{/tcc}" method="post" class="card">
+        <h2>Novo TCC</h2>
+        <input type="text" name="titulo" placeholder="Título" required>
+        <textarea name="conteudo" placeholder="Conteúdo"></textarea>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <div th:each="t : ${tccs}" class="card">
+        <h2 th:text="${t.titulo}">Título</h2>
+        <p th:text="${t.conteudo}">Conteúdo</p>
+        <p>Paciente: <span th:text="${t.paciente?.nome}"></span></p>
+    </div>
+</section>
+</body>
+</html>

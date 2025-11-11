@@ -12,8 +12,8 @@ import java.time.LocalDate;
 public class Autoavaliacao {
     @Id @GeneratedValue
     private Long id;
-    private String descricao;
-    private LocalDate data;
+    private String humor;
+    private String observacoes;
 
     @ManyToOne
     private Paciente paciente;

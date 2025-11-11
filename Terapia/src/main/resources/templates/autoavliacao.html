@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <title>Autoavaliações</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}">
+</head>
+<body>
+<header><h1>Autoavaliações</h1></header>
+<nav>
+    <a th:href="@{/}">Início</a>
+    <a th:href="@{/pacientes}">Paciente</a>
+    <a th:href="@{/profissionais}">Profissional</a>
+    <a th:href="@{/emergencias}">Emergência</a>
+    <a th:href="@{/tcc}">TCC</a>
+</nav>
+
+<section>
+    <form th:action="@{/autoavaliacoes}" method="post" class="card">
+        <h2>Nova Autoavaliação</h2>
+        <input type="text" name="humor" placeholder="Humor" required>
+        <textarea name="observacoes" placeholder="Observações"></textarea>
+        <button type="submit">Salvar</button>
+    </form>
+
+    <div th:each="a : ${autoavaliacoes}" class="card">
+        <h2 th:text="${a.humor}">Humor</h2>
+        <p th:text="${a.observacoes}">Observações</p>
+        <p>Paciente: <span th:text="${a.paciente?.nome}"></span></p>
+    </div>
+</section>
+</body>
+</html>

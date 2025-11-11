@@ -22,11 +22,4 @@ public class TCCService {
         return repository.save(tcc);
     }
 
-    public Optional<TCC> buscarPorId(Long id) {
-        return repository.findById(id);
-    }
-
-    public void deletar(Long id) {
-        repository.deleteById(id);
-    }
 }
